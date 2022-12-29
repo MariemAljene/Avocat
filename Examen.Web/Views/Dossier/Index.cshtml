@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Examen.ApplicationCore.Domain.Dossier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="index">
+    <fieldset>
+        <legend>
+            Recherche
+        </legend>
+        Saisir le nom de l avocat
+        <input type="string" name="avocatName" />
+        <input type="submit" name="search" />
+
+    </fieldset>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Frais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avocat)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avocat.Nom)
+            </td>
+            <td>
+                    @Html.ActionLink(linkText:"Avocat ",actionName:"Details",controllerName:"Avocat",routeValues:new{id=item.Avocat},htmlAttributes:null)
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
